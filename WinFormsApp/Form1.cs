@@ -5,6 +5,7 @@ namespace WinFormsApp
     public partial class Form1 : Form
     {
         private List<int> tippek = new List<int>();
+        private List<int> TalalatSzam = new List<int>();
         Adatbazis db = new Adatbazis();
         public Form1()
         {
@@ -90,7 +91,11 @@ namespace WinFormsApp
             lbl.Text += "Leadott tippek: ";
             lbl.Text += string.Join("; ", tippek) + "\n";
             lbl.Text += "Eltalált számok: ";
-            lbl.Text += string.Join("; ", keszlet.Intersect(tippek));
+            lbl.Text += string.Join("; ", keszlet.Intersect(tippek)) + "\n";
+            
+            TalalatSzam = (keszlet.Intersect(tippek)).ToList();
+            lbl.Text += "Az eltalált egyezések darabszáma: ";
+            lbl.Text += string.Join("", TalalatSzam.Count().ToString());
 
             db.Huzas.Add(new ClassLibrary.Models.Huzas(string.Join(";", keszlet)));
             db.SaveChanges();   
